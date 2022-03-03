@@ -76,16 +76,40 @@ const addBookHandler = (request, h) => {
   return response;
 };
 
-const getAllBooksHandler = () => ({
-  status: 'success',
-  data: {
-    books: books.map(book => ({
-      id: book.id,
-      name: book.name,
-      publisher: book.publisher
-    })),
-  },
-});
+const getAllBooksHandler = (request, h) => {
+  const {reading} = request.query;
+  console.log(reading);
+
+  const bookReading = books.filter(br => br.reading == reading);
+  if (reading == 1){
+    return{
+      status: 'success',
+      data: {
+        bookReading
+      }
+    };
+  } else if (reading == 0){
+    return{
+      status: 'success',
+      data: {
+        bookReading
+      }
+    };
+  }
+
+  const response = h.response({
+    status: 'success',
+    data: {
+      books: books.map(book => ({
+        id: book.id,
+        name: book.name,
+        publisher: book.publisher
+      })),
+    },
+  });
+  response.code(200);
+  return response;
+};
 
 const getBookByIdHandler = (request, h) => {
   const {
@@ -111,7 +135,7 @@ const getBookByIdHandler = (request, h) => {
 
 const editBookHandler = (request, h) => {
   const {
-    id
+    bookId
   } = request.params;
 
   const {
@@ -147,7 +171,7 @@ const editBookHandler = (request, h) => {
     return response;
   }
   
-  const index = books.findIndex((book) => book.id === id);
+  const index = books.findIndex((book) => book.id === bookId);
   if (index !== -1) {
     books[index] = {
       ...books[index],
@@ -177,10 +201,57 @@ const editBookHandler = (request, h) => {
   return response;
 };
 
+const deleteBookHandler = (request, h) => {
+  const { bookId } = request.params;
+ 
+  const index = books.findIndex((book) => book.id === bookId);
+ 
+  if (index !== -1) {
+    books.splice(index, 1);
+    const response = h.response({
+      status: 'success',
+      message: 'Buku berhasil dihapus',
+    });
+    response.code(200);
+    return response;
+  }
+ 
+  const response = h.response({
+    status: 'fail',
+    message: 'Buku gagal dihapus. Id tidak ditemukan',
+  });
+  response.code(404);
+  return response;
+};
+
+const getAllReadingBooksHandler = (request, h) => {
+  const reading = request.query;
+ 
+  // const index = books.findIndex((book) => book.reading === reading);
+  const bookReading = books.filter((b) => b.reading === reading);
+
+  if (reading === 1) {
+    return {
+      status: 'success',
+      data: {
+        bookReading,
+      },
+    };
+  }
+  const response = h.response({
+    status: 'fail',
+    message: 'Buku tidak ditemukan',
+  });
+  response.code(404);
+  return response;
+};
+
 
 module.exports = {
   addBookHandler,
   getAllBooksHandler,
   getBookByIdHandler,
-  editBookHandler
+  editBookHandler,
+  deleteBookHandler,
+  getAllReadingBooksHandler
 };
