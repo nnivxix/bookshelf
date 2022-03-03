@@ -77,34 +77,89 @@ const addBookHandler = (request, h) => {
 };
 
 const getAllBooksHandler = (request, h) => {
-  const {reading} = request.query;
-  console.log(reading);
+  const {reading, finished, name } = request.query;
 
   const bookReading = books.filter(br => br.reading == reading);
   if (reading == 1){
     return{
       status: 'success',
       data: {
-        bookReading
+        books: bookReading.map(book => ({
+          id: book.id,
+          name: book.name,
+          publisher: book.publisher
+        })
+        )
       }
     };
   } else if (reading == 0){
     return{
       status: 'success',
       data: {
-        bookReading
+        books: bookReading.map(book => ({
+          id: book.id,
+          name: book.name,
+          publisher: book.publisher
+        })
+        )
       }
     };
+  }
+
+  const bookFinished = books.filter(bf => bf.finished == finished);
+  if (finished == 1){
+    return{
+      status: 'success',
+      data: {
+        books: bookFinished.map(book => ({
+          id: book.id,
+          name: book.name,
+          publisher: book.publisher
+        })
+        )
+      }
+    };
+  } else if (finished == 0){
+    return{
+      status: 'success',
+      data: {
+        books: bookFinished.map(book => ({
+          id: book.id,
+          name: book.name,
+          publisher: book.publisher
+        })
+        )
+      }
+    };
+  }
+
+  if (name !== undefined){
+    const response = h.response({
+      
+      status: 'success',
+      data: {
+        books:
+        books.filter(bn => bn.name.toLowerCase().includes(name.toLowerCase()))
+          .map(n => ({
+            id: n.id,
+            name: n.name,
+            publisher: n.publisher
+          }))
+      }
+    });
+
+    response.code(200);
+    return response;
   }
 
   const response = h.response({
     status: 'success',
     data: {
-      books: books.map(book => ({
-        id: book.id,
-        name: book.name,
-        publisher: book.publisher
-      })),
+      books: books.map(b => ({
+        id: b.id,
+        name: b.name,
+        publisher: b.publisher
+      }))
     },
   });
   response.code(200);
