@@ -1,0 +1,21 @@
+{
+  "name": "bookshelf",
+  "version": "1.0.0",
+  "description": "simpan buku dan baca nanti",
+  "main": "index.js",
+  "scripts": {
+    "serve": "nodemon src/server",
+    "lint": "eslint ./src --fix"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@hapi/hapi": "^20.2.1",
+    "nanoid": "^3.3.1",
+    "nodemon": "^2.0.15"
+  },
+  "devDependencies": {
+    "eslint": "^8.10.0"
+  }
+}
