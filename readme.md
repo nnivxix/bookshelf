@@ -18,6 +18,8 @@ REST API untuk menejem buku yang dibangun dengan [Hapi](https://hapi.dev/) salah
 
 `null`
 
-## Info
+## ⚠ Info ⚠
 
 Untuk bagian front-end silakan buka `branch` yang lain di *repository* ini.
+
+- [branch front-end](https://github.com/nnivxix/bookshelf/tree/front-end)
