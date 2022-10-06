@@ -1,5 +1,7 @@
 # Bookshelf
 
+![Bookshelf image](bookshelf.jpg)
+
 Bookshelf merupakan web aplikasi untuk menejemen buku yang dibuat dengan vanila javacript, ini merupakan tugas akhir dari modul kelas [Belajar Membuat Front-End Web untuk Pemula](https://www.dicoding.com/academies/315) yang dibuat oleh [dicoding](https://www.dicoding.com/).
 
 ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white) ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white) ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
