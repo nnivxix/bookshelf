@@ -14,53 +14,45 @@
 </head>
 
 <body>
+  <a href="#inputBookTitle" class="skip-link">Menuju ke konten</a>
   <header class="head_bar">
-    <h1 class="head_bar__title">Bookshelf Apps</h1>
+    <h1 class="head_bar__title">Rakbuku</h1>
+    <form id="searchBook">
+      <input id="searchBookTitle" type="text" placeholder="Cari Buku: Manusia Hebat">
+    </form>
   </header>
-  <main>
+
+  <main class="container">
     <section class="input_section">
-      <h2>Masukkan Buku Baru</h2>
       <form id="inputBook">
         <div class="input">
-          <label for="inputBookTitle">Judul</label>
+          <label for="inputBookTitle">Judul Buku<span class="important">*</span></label>
           <input id="inputBookTitle" type="text" required>
         </div>
         <div class="input">
-          <label for="inputBookAuthor">Penulis</label>
+          <label for="inputBookAuthor">Penulis Buku <span class="important">*</span></label>
           <input id="inputBookAuthor" type="text" required>
         </div>
         <div class="input">
-          <label for="inputBookYear">Tahun</label>
+          <label for="inputBookYear">Tahun Terbit <span class="important">*</span></label>
           <input id="inputBookYear" type="number" required>
         </div>
         <div class="input_inline">
+          <input id="inputBookIsComplete" type="checkbox" style="padding-right: 10px;">
           <label for="inputBookIsComplete">Selesai dibaca</label>
-          <input id="inputBookIsComplete" type="checkbox">
         </div>
-        <button id="bookSubmit" type="submit">Masukkan Buku ke rak <span>Belum selesai dibaca</span></button>
+        <!-- <button id="bookSubmit" type="submit">Masukkan Buku ke rak <span>Belum selesai dibaca</span></button> -->
       </form>
     </section>
-
-    <section class="search_section">
-      <h2>Cari Buku (Opsional)</h2>
-      <form id="searchBook">
-        <label for="searchBookTitle">Judul</label>
-        <input id="searchBookTitle" type="text">
-        <button id="searchSubmit" type="submit">Cari</button>
-      </form>
-    </section>
-
     <section class="book_shelf">
-      <h2>Belum selesai dibaca</h2>
-
+      <h2>Sedang dibaca</h2>
       <div id="incompleteBookshelfList" class="book_list">
 
       </div>
     </section>
 
     <section class="book_shelf">
-      <h2>Selesai dibaca</h2>
-
+      <h2>Sudah dibaca</h2>
       <div id="completeBookshelfList" class="book_list">
 
       </div>

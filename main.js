@@ -34,6 +34,7 @@ function addBook() {
 // Mark book is completed or not
 function checkedBook(id){
   const targetBook = books.find(book => book.id == id)
+  
   targetBook.isComplete = !targetBook.isComplete
   document.dispatchEvent(new Event('render-book'))
   localStorage.setItem('books', JSON.stringify(books))
@@ -41,9 +42,10 @@ function checkedBook(id){
 }
 
 // Delete book
-function deleteBook(id) {
+function deleteBook(id, namabuku) {
   const targetBook = books.findIndex(book => book.id == id)
-  books.splice(targetBook,1);
+  const question = confirm('Apakah kamu yakin ingin menghapus buku ' + namabuku + '?')
+  if (question) books.splice(targetBook,1);
   document.dispatchEvent(new Event('render-book'))
   localStorage.setItem('books', JSON.stringify(books)) 
 }
@@ -52,17 +54,10 @@ function deleteBook(id) {
 // find book by name
 function findBookByName(title) {
   const bookItem = document.getElementsByClassName('book_item');
-  
-  const bookFiltered = books.filter(book => {
-    return book.title.toLowerCase().includes(title.value.toLowerCase())
-  })
-
-  console.log(bookFiltered)
 
   for (const book of bookItem) {
     const itemTitle = book.querySelector(".item-title")
-    console.log(itemTitle)
-    console.log(book)
+
     if(itemTitle.textContent.toLowerCase().includes(title.value)) {
       book.style.display = 'block'
     } else {
@@ -76,19 +71,18 @@ function renderBook(book, selector){
     if (book.length > 0) {
       selector.innerHTML = book.map(book => {
         return `
-        <article class="book_item">
+        <article class="book_item ${book.isComplete ? 'completed' : 'incompleted'}">
           <h3 class="item-title">${book.title}</h3>
-          <p>Penulis: ${book.author}</p>
-          <p>Tahun: ${book.year}</p>
+          <p>${book.author} · ${book.year}</p>
           <div class="action">
-            <button class="green" onClick="checkedBook('${book.id}')">Belum selesai dibaca</button>
-            <button class="red" onClick="deleteBook('${book.id}')">Hapus buku</button>
+            <button class="green" onClick="checkedBook('${book.id}')">${book.isComplete ? 'Tandai sedang dibaca': 'Tandai sudah dibaca'}</button>
+            <button class="red" onClick="deleteBook('${book.id}', '${book.title}')">Hapus buku</button>
           </div>
         </article>
         `
       }).join('')
     } else {
-      selector.innerHTML = '<h1>Belum ada buku boi</h1>'
+      selector.innerHTML = '<p>Belum ada buku.</p>'
     }
   }
 
