@@ -99,7 +99,7 @@ function findBookByName(title) {
   const bookItem = document.getElementsByClassName('book_item');
   for (const book of bookItem) {
     const itemTitle = book.querySelector(".item-title")
-    if(itemTitle.textContent.toLowerCase().includes(title.value)) {
+    if(itemTitle.textContent.toLowerCase().includes(title.value.toLowerCase())) {
       book.style.display = 'block'
     } else {
       book.style.display = 'none'
@@ -131,8 +131,7 @@ function renderBook(book, selector){
 
 document.addEventListener('DOMContentLoaded', function() {
   const searchBook = document.getElementById('searchBook');
-  searchBook.addEventListener('input', function(e) {
-    e.preventDefault()
+  searchBookTitle.addEventListener('input', function() {
     findBookByName(searchBookTitle)
   })
   
