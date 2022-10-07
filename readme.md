@@ -24,3 +24,9 @@ Fitur yang ada di aplikasi ini di antaranya:
 
 - [x] Clean Code
 - [ ] Sort Array
+
+## ⚠ Info ⚠
+
+Untuk bagian front-end silakan buka `branch` yang lain di *repository* ini.
+
+- [branch back-end](https://github.com/nnivxix/bookshelf/tree/main)
