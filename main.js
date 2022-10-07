@@ -30,7 +30,6 @@ function addBook() {
     isComplete: isComplete.checked
   })
 
-  console.log(isEditing)
   document.dispatchEvent(new Event('render-book'))
   localStorage.setItem('books', JSON.stringify(books))
 }
@@ -59,11 +58,12 @@ function editBook(id) {
   const targetBook = books.find(book => book.id == id)
   
   bookContent = targetBook
-  console.log(bookContent)
+
   title.value = targetBook.title;
   year.value = targetBook.year;
   author.value = targetBook.author
   isComplete.checked = targetBook.isComplete
+  window.location.href = '#inputBookTitle'
 }
 
 function updateBook(){
@@ -75,11 +75,9 @@ function updateBook(){
     isComplete: isComplete.checked
   }
 
-
   const bookIndex = books.findIndex(book => book.id == bookContent.id)
   books.splice(bookIndex, 1, bookContent)
 
-    
   isEditing = false
   document.dispatchEvent(new Event('render-book'))
   localStorage.setItem('books', JSON.stringify(books)) 
@@ -94,10 +92,12 @@ function findBookByName(title) {
 
   for (const book of bookItem) {
     const itemTitle = book.querySelector(".item-title")
-
+    const inputSection = document.getElementById('input_section')
     if(itemTitle.textContent.toLowerCase().includes(title.value)) {
+      inputSection.style.display = 'flex'
       book.style.display = 'block'
     } else {
+      inputSection.style.display = 'none'
       book.style.display = 'none'
     }
   }
@@ -112,9 +112,9 @@ function renderBook(book, selector){
           <h3 class="item-title">${book.title}</h3>
           <p>${book.author} · ${book.year}</p>
           <div class="action">
-            <button class="green" onClick="checkedBook('${book.id}')">${book.isComplete ? 'Tandai sedang dibaca': 'Tandai sudah dibaca'}</button>
-            <button onClick="editBook('${book.id}')">Edit Book</button>
-            <button class="red" onClick="deleteBook('${book.id}', '${book.title}')">Hapus buku</button>
+            <button onClick="checkedBook('${book.id}')">${book.isComplete ? 'Tandai sedang dibaca': 'Tandai sudah dibaca'}</button>
+            <button onClick="editBook('${book.id}')">Ubah Buku</button>
+            <button onClick="deleteBook('${book.id}', '${book.title}')">Hapus buku</button>
           </div>
         </article>
         `
@@ -144,7 +144,6 @@ document.addEventListener('DOMContentLoaded', function() {
     year.value = "";
     isComplete.checked = false;
     bookContent = {}
-    console.log(bookContent)
   })
   loadDataFromStorage()
 })

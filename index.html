@@ -8,8 +8,9 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Bookshelf Apps</title>
   <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap"
-    rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <meta name="theme-color" content="#E9E9E9">
 </head>
@@ -24,19 +25,19 @@
   </header>
 
   <main class="container">
-    <section class="input_section">
+    <section class="input_section" id="input_section" >
       <form id="inputBook">
         <div class="input">
           <label for="inputBookTitle">Judul Buku<span class="important">*</span></label>
-          <input id="inputBookTitle" type="text" required>
+          <input id="inputBookTitle" autofocus type="text" required placeholder="Menjadi Koki Handal">
         </div>
         <div class="input">
           <label for="inputBookAuthor">Penulis Buku <span class="important">*</span></label>
-          <input id="inputBookAuthor" type="text" required>
+          <input id="inputBookAuthor" type="text" required placeholder="Junaedi">
         </div>
         <div class="input">
           <label for="inputBookYear">Tahun Terbit <span class="important">*</span></label>
-          <input id="inputBookYear" type="number" required>
+          <input id="inputBookYear" type="number" required placeholder="2019">
         </div>
         <div class="input_inline">
           <input id="inputBookIsComplete" type="checkbox" style="padding-right: 10px;">
