@@ -23,6 +23,7 @@ Fitur yang ada di aplikasi ini di antaranya:
 ## Next Todo
 
 - [x] Clean Code
+- [ ] onInput harus di input element
 - [ ] Sort Array
 
 ## ⚠ Info ⚠
