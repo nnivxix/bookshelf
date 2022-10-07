@@ -6,21 +6,20 @@ const title = document.getElementById('inputBookTitle');
 const author = document.getElementById('inputBookAuthor');
 const year = document.getElementById('inputBookYear')
 const isComplete = document.getElementById('inputBookIsComplete');
+const searchBookTitle = document.getElementById('searchBookTitle')
+const bookSubmit = document.getElementById('bookSubmit');
 
 function loadDataFromStorage() {
   const serializedData = localStorage.getItem('books');
   let data = JSON.parse(serializedData);
-    
   if (data !== null) {
     for (const book of data) {
       books.push(book);
     }
   }
-
   document.dispatchEvent(new Event('render-book'))
 }
 
-// Add Books
 function addBook() {
   books.push({
     id: Math.random().toString(16).substr(2, 8),
@@ -29,40 +28,32 @@ function addBook() {
     year: parseInt(year.value),
     isComplete: isComplete.checked
   })
-
-  document.dispatchEvent(new Event('render-book'))
-  localStorage.setItem('books', JSON.stringify(books))
+  alert('Mantap, Buku telah berhasil ditambah')
+  updateView()
 }
 
-// Mark book is completed or not
 function checkedBook(id){
-  const targetBook = books.find(book => book.id == id)
-  
-  targetBook.isComplete = !targetBook.isComplete
-  document.dispatchEvent(new Event('render-book'))
-  localStorage.setItem('books', JSON.stringify(books))
-
+  bookContent = findBookById(id)
+  bookContent.isComplete = !bookContent.isComplete
+  updateView()
 }
 
-// Delete book
 function deleteBook(id, namabuku) {
-  const targetBook = books.findIndex(book => book.id == id)
   const question = confirm('Apakah kamu yakin ingin menghapus buku ' + namabuku + '?')
-  if (question) books.splice(targetBook,1);
-  document.dispatchEvent(new Event('render-book'))
-  localStorage.setItem('books', JSON.stringify(books)) 
+  if (question) books.splice(getIndexBook(id),1);
+  updateView()
 }
 
 function editBook(id) {
   isEditing = true;
-  const targetBook = books.find(book => book.id == id)
-  
-  bookContent = targetBook
+  bookContent = findBookById(id)
 
-  title.value = targetBook.title;
-  year.value = targetBook.year;
-  author.value = targetBook.author
-  isComplete.checked = targetBook.isComplete
+  title.value = bookContent.title;
+  year.value = bookContent.year;
+  author.value = bookContent.author
+  isComplete.checked = bookContent.isComplete
+
+  bookSubmit.innerText = "Perbaharui Buku"
   window.location.href = '#inputBookTitle'
 }
 
@@ -75,35 +66,48 @@ function updateBook(){
     isComplete: isComplete.checked
   }
 
-  const bookIndex = books.findIndex(book => book.id == bookContent.id)
-  books.splice(bookIndex, 1, bookContent)
-
+  books.splice(getIndexBook(bookContent.id), 1, bookContent)
   isEditing = false
-  document.dispatchEvent(new Event('render-book'))
-  localStorage.setItem('books', JSON.stringify(books)) 
-  
+  alert('Mantap, Buku ' +'berhasil diubah' );
+  updateView()
 }
 
+function getIndexBook(id) {
+  return books.findIndex(book => book.id == id)
+}
 
+function findBookById(id) {
+  return books.find(book => book.id == id)
+}
 
-// find book by name
+function updateView() {
+  document.dispatchEvent(new Event('render-book'))
+  localStorage.setItem('books', JSON.stringify(books)) 
+  return;
+}
+
+function resetValue() {
+  title.value = "";
+  author.value = "";
+  year.value = "";
+  isComplete.checked = false;
+  bookContent = {};
+  searchBookTitle.value = "";
+}
+
 function findBookByName(title) {
   const bookItem = document.getElementsByClassName('book_item');
-
   for (const book of bookItem) {
     const itemTitle = book.querySelector(".item-title")
-    const inputSection = document.getElementById('input_section')
     if(itemTitle.textContent.toLowerCase().includes(title.value)) {
-      inputSection.style.display = 'flex'
       book.style.display = 'block'
     } else {
-      inputSection.style.display = 'none'
       book.style.display = 'none'
     }
   }
+  return;
 }
 
-// render books
 function renderBook(book, selector){
     if (book.length > 0) {
       selector.innerHTML = book.map(book => {
@@ -114,7 +118,7 @@ function renderBook(book, selector){
           <div class="action">
             <button onClick="checkedBook('${book.id}')">${book.isComplete ? 'Tandai sedang dibaca': 'Tandai sudah dibaca'}</button>
             <button onClick="editBook('${book.id}')">Ubah Buku</button>
-            <button onClick="deleteBook('${book.id}', '${book.title}')">Hapus buku</button>
+            <button onClick="deleteBook('${book.id}','${book.title}')">Hapus buku</button>
           </div>
         </article>
         `
@@ -126,11 +130,8 @@ function renderBook(book, selector){
 
 
 document.addEventListener('DOMContentLoaded', function() {
-
   const searchBook = document.getElementById('searchBook');
-  const searchBookTitle = document.getElementById('searchBookTitle')
-  
-  searchBook.addEventListener('submit', function(e) {
+  searchBook.addEventListener('input', function(e) {
     e.preventDefault()
     findBookByName(searchBookTitle)
   })
@@ -139,16 +140,15 @@ document.addEventListener('DOMContentLoaded', function() {
   formInput.addEventListener('submit', function(e) {
     e.preventDefault()
     isEditing ? updateBook() : addBook()
-    title.value = "";
-    author.value = "";
-    year.value = "";
-    isComplete.checked = false;
-    bookContent = {}
+
+    resetValue()
   })
   loadDataFromStorage()
 })
 
 document.addEventListener('render-book', function() { 
+  if (!isEditing) bookSubmit.innerText = "Tambahkan Buku";
+  console.log(isEditing)
     const targetBookIncomplete = books.filter(book => book.isComplete == false);
     const targetBookComplete = books.filter(book => book.isComplete == true);
     

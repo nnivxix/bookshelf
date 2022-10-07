@@ -19,3 +19,8 @@ Fitur yang ada di aplikasi ini di antaranya:
 ## Screenshots
 
 `null`
+
+## Next Todo
+
+- [x] Clean Code
+- [ ] Sort Array

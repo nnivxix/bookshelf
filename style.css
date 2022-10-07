@@ -12,7 +12,9 @@
     padding: 0;
     margin: 0px;
     box-sizing: border-box;
-    background-color: var(--main-bg);
+  }
+body {
+  background-color: var(--main-bg);
 }
 
 body, input, button {
@@ -46,6 +48,10 @@ input, button {
     color: var(--main-text-color);
 }
 
+.head_bar .head_bar__title {
+  padding-bottom: 10px;
+}
+
 .container {
     width: 100%;
     padding: 16px;
@@ -73,14 +79,15 @@ input, button {
 }
 
 .input_section > form > button {
-    background-color: cornflowerblue;
+    background-color: var(--main-text-color);
     color: white;
     border: 0;
     border-radius: 5px;
     display: block;
     width: 100%;
-    padding: 8px;
+    padding: 10px;
     cursor: pointer;
+    margin-top: 32px;
 }
 
 .input_section > form > button > span {
@@ -109,9 +116,6 @@ input, button {
     align-items: center;
 }
 
-.input_section > form > #bookSubmit {
-  display: none;
-}
 
 .input_section > form > .input_inline > label {
     color: var(--second-text-color);
@@ -168,13 +172,8 @@ input, button {
 color: var(--second-text-color);
 }
 
-.book_shelf > .book_list {
-    /* padding: 16px; */
-}
-
 .book_shelf > .book_list > .book_item {
     padding: 8px 16px 16px 16px;
-    /* border: 1px solid var(--second-text-color); */
     border-radius: 8px;
     margin: 10px 0;
 }
@@ -253,10 +252,10 @@ color: var(--second-text-color);
     grid-column: 2/3;
   }
   .book_item h3 {
-    font-size: 2em;
+    font-size: 1.6em;
   }
   .book_item p {
-    font-size: 18px;
+    font-size: 16px;
   }
   .book_item > .action > button {
     font-size: 14px;
