@@ -1,4 +1,6 @@
 const books = [];
+let bookContent = {};
+let isEditing = false;
 
 const title = document.getElementById('inputBookTitle');
 const author = document.getElementById('inputBookAuthor');
@@ -24,9 +26,11 @@ function addBook() {
     id: Math.random().toString(16).substr(2, 8),
     title: title.value,
     author: author.value,
-    year: year.value,
+    year: parseInt(year.value),
     isComplete: isComplete.checked
   })
+
+  console.log(isEditing)
   document.dispatchEvent(new Event('render-book'))
   localStorage.setItem('books', JSON.stringify(books))
 }
@@ -49,6 +53,39 @@ function deleteBook(id, namabuku) {
   document.dispatchEvent(new Event('render-book'))
   localStorage.setItem('books', JSON.stringify(books)) 
 }
+
+function editBook(id) {
+  isEditing = true;
+  const targetBook = books.find(book => book.id == id)
+  
+  bookContent = targetBook
+  console.log(bookContent)
+  title.value = targetBook.title;
+  year.value = targetBook.year;
+  author.value = targetBook.author
+  isComplete.checked = targetBook.isComplete
+}
+
+function updateBook(){
+  bookContent = {
+    id: bookContent.id,
+    title: title.value,
+    author: author.value,
+    year: parseInt(year.value),
+    isComplete: isComplete.checked
+  }
+
+
+  const bookIndex = books.findIndex(book => book.id == bookContent.id)
+  books.splice(bookIndex, 1, bookContent)
+
+    
+  isEditing = false
+  document.dispatchEvent(new Event('render-book'))
+  localStorage.setItem('books', JSON.stringify(books)) 
+  
+}
+
 
 
 // find book by name
@@ -76,6 +113,7 @@ function renderBook(book, selector){
           <p>${book.author} · ${book.year}</p>
           <div class="action">
             <button class="green" onClick="checkedBook('${book.id}')">${book.isComplete ? 'Tandai sedang dibaca': 'Tandai sudah dibaca'}</button>
+            <button onClick="editBook('${book.id}')">Edit Book</button>
             <button class="red" onClick="deleteBook('${book.id}', '${book.title}')">Hapus buku</button>
           </div>
         </article>
@@ -100,11 +138,13 @@ document.addEventListener('DOMContentLoaded', function() {
   const formInput = document.getElementById('inputBook');
   formInput.addEventListener('submit', function(e) {
     e.preventDefault()
-    addBook()
+    isEditing ? updateBook() : addBook()
     title.value = "";
     author.value = "";
     year.value = "";
     isComplete.checked = false;
+    bookContent = {}
+    console.log(bookContent)
   })
   loadDataFromStorage()
 })

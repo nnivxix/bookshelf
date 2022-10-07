@@ -114,6 +114,10 @@ input, button {
     align-items: center;
 }
 
+.input_section > form > #bookSubmit {
+  display: none;
+}
+
 .input_section > form > .input_inline > label {
     color: var(--second-text-color);
     font-weight: bold;
