@@ -80,11 +80,20 @@ function findBookById(id) {
   return books.find(book => book.id == id)
 }
 
+function sortBook(book) {
+  return book.sort((a,b) => (a.title > b.title) ? 1 : ((b.title  > a.title) ? -1 : 0 ));
+}
+
+function filterBookIscomplete(isComplete){
+  return books.filter(book => book.isComplete == isComplete);
+}
+
 function updateView() {
   document.dispatchEvent(new Event('render-book'))
   localStorage.setItem('books', JSON.stringify(books)) 
   return;
 }
+
 
 function resetValue() {
   title.value = "";
@@ -126,7 +135,7 @@ function renderBook(book, selector){
     } else {
       selector.innerHTML = '<p>Belum ada buku.</p>'
     }
-  }
+}
 
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -147,11 +156,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 document.addEventListener('render-book', function() { 
   if (!isEditing) bookSubmit.innerText = "Tambahkan Buku";
-  console.log(isEditing)
-    const targetBookIncomplete = books.filter(book => book.isComplete == false);
-    const targetBookComplete = books.filter(book => book.isComplete == true);
-    
-    renderBook(targetBookIncomplete, document.getElementById('incompleteBookshelfList'))
-    renderBook(targetBookComplete, document.getElementById('completeBookshelfList'))
-  
+
+  renderBook(sortBook(filterBookIscomplete(false)), document.getElementById('incompleteBookshelfList'))
+  renderBook(sortBook(filterBookIscomplete(true)), document.getElementById('completeBookshelfList'))
 })

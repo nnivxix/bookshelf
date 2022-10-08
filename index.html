@@ -4,29 +4,47 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport"
-    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    content="width=device-width, user-scalable=no,
+    initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Bookshelf Apps</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
   <link rel="stylesheet" href="style.css">
   <meta name="theme-color" content="#E9E9E9">
+
+  <!-- Primary Meta Tags -->
+  <title>Rakbuku</title>
+  <meta name="title" content="Rakbuku">
+  <meta name="description" content="Atur buku yang kamu baca sekarang">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://nnivxix.github.io/bookshelf/">
+  <meta property="og:title" content="Rakbuku">
+  <meta property="og:description" content="Atur buku yang kamu baca sekarang">
+  <meta property="og:image" content="/img/shot.png">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://nnivxix.github.io/bookshelf/">
+  <meta property="twitter:title" content="Rakbuku">
+  <meta property="twitter:description" content="Atur buku yang kamu baca sekarang">
+  <meta property="twitter:image" content="/img/shot.png">
 </head>
 
 <body>
-  <a href="#inputBookTitle" class="skip-link">Menuju ke konten</a>
   <header class="head_bar">
     <h1 class="head_bar__title">Rakbuku</h1>
-    <form id="searchBook">
+    <form id="searchBook" onsubmit="event.preventDefault();">
       <input id="searchBookTitle" type="text" placeholder="Cari Buku: Manusia Hebat">
     </form>
   </header>
 
   <main class="container">
-    <section class="input_section" id="input_section" >
+    <div class="input_section" id="input_section" >
       <form id="inputBook">
         <div class="input">
           <label for="inputBookTitle">Judul Buku<span class="important">*</span></label>
@@ -46,20 +64,20 @@
         </div>
         <button id="bookSubmit" type="submit"></button>
       </form>
-    </section>
-    <section class="book_shelf">
-      <h2>Sedang dibaca</h2>
+    </div>
+    <div class="book_shelf">
+      <h2>Sedang dibaca 📖</h2>
       <div id="incompleteBookshelfList" class="book_list">
         <!-- konten buku berada di sini -->
       </div>
-    </section>
+    </div>
     
-    <section class="book_shelf">
-      <h2>Sudah dibaca</h2>
+    <div class="book_shelf">
+      <h2>Sudah dibaca 📚</h2>
       <div id="completeBookshelfList" class="book_list">
         <!-- konten buku berada di sini -->
       </div>
-    </section>
+    </div>
   </main>
 
   <script src="main.js"></script>
