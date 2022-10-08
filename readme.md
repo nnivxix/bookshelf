@@ -17,6 +17,7 @@ Fitur yang ada di aplikasi ini di antaranya:
 3. Menghapus buku jika sudah tidak dibutuhkan lagi.
 4. Mencari buku.
 5. Menyimpan data di peramban pengguna dengan [Web Storage API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API).
+6. Mengubah konten buku. 
 
 ## Screenshot
 
@@ -27,6 +28,7 @@ Fitur yang ada di aplikasi ini di antaranya:
 - [x] Clean Code
 - [x] onInput harus di input element
 - [x] Sort Books
+- [ ] Footer 
 
 ## ⚠ Info ⚠
 
