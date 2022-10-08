@@ -26,24 +26,30 @@ function loadDataFromStorage() {
 function addBook() {
   books.push({
     id: Math.random().toString(16).substr(2, 8),
-    title: title.value,
-    author: author.value,
+    title: title.value.trim(),
+    author: author.value.trim(),
     year: parseInt(year.value),
     isComplete: isComplete.checked
   })
-  alert('Mantap, Buku telah berhasil ditambah.')
+  alert('Yayy, Buku telah berhasil ditambah.')
   updateView()
 }
 
 function checkedBook(id){
   bookContent = findBookById(id)
-  bookContent.isComplete = !bookContent.isComplete
+  bookContent.isComplete = !bookContent.isComplete;
+
+  showHideForm()
+  resetValue()
   updateView()
 }
 
 function deleteBook(id, namabuku) {
   const question = confirm('Yakin nih mau menghapus buku: "' + namabuku + '"?')
   if (question) books.splice(getIndexBook(id),1);
+
+  showHideForm()
+  resetValue()
   updateView()
 }
 
@@ -57,10 +63,7 @@ function editBook(id) {
   author.value = bookContent.author
   isComplete.checked = bookContent.isComplete
 
-  if (inputSection.classList.contains('hidden')) {
-    inputSection.classList.add('flex')
-    inputSection.classList.remove('hidden')
-  }
+  showHideForm()
   searchBookTitle.value = "";
   updateView()
   bookSubmit.innerText = "Perbaharui Buku"
@@ -70,8 +73,8 @@ function editBook(id) {
 function updateBook(){
   bookContent = {
     id: bookContent.id,
-    title: title.value,
-    author: author.value,
+    title: title.value.trim(),
+    author: author.value.trim(),
     year: parseInt(year.value),
     isComplete: isComplete.checked
   }
@@ -129,6 +132,14 @@ function findBookByName(searchValue) {
 
   return;
 }
+
+function showHideForm() {
+  if (inputSection.classList.contains('hidden')) {
+    inputSection.classList.add('flex')
+    inputSection.classList.remove('hidden')
+  }
+}
+
 function updateView() {
   document.dispatchEvent(new Event('render-book'))
   localStorage.setItem('books', JSON.stringify(books)) 
