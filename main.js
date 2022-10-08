@@ -46,11 +46,12 @@ function checkedBook(id){
 
 function deleteBook(id, namabuku) {
   const question = confirm('Yakin nih mau menghapus buku: "' + namabuku + '"?')
-  if (question) books.splice(getIndexBook(id),1);
-
-  showHideForm()
-  resetValue()
-  updateView()
+  if (question) {
+    books.splice(getIndexBook(id),1);
+    showHideForm()
+    resetValue()
+    updateView()
+  }
 }
 
 function editBook(id) {
@@ -64,8 +65,8 @@ function editBook(id) {
   isComplete.checked = bookContent.isComplete
 
   showHideForm()
-  searchBookTitle.value = "";
   updateView()
+  searchBookTitle.value = "";
   bookSubmit.innerText = "Perbaharui Buku"
   window.location.href = '#inputBookTitle'
 }
