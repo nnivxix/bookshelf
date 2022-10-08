@@ -12,12 +12,13 @@ Bookshelf merupakan web aplikasi untuk menejemen buku yang dibuat dengan vanila 
 
 Fitur yang ada di aplikasi ini di antaranya:
 
-1. Menambah buku.
-2. Memindahkan buku yang mana sudah selesai dibaca atau belum.
-3. Menghapus buku jika sudah tidak dibutuhkan lagi.
-4. Mencari buku.
-5. Menyimpan data di peramban pengguna dengan [Web Storage API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API).
-6. Mengubah konten buku. 
+1. Menambah buku. (Create)
+2. Menampilkan semua buku. (Read)
+3. Memindahkan buku yang mana sudah selesai dibaca atau belum. (Update)
+4. Mengubah konten buku. (Update)
+5. Menghapus buku jika sudah tidak dibutuhkan lagi. (Delete)
+6. Mencari buku.
+7. Menyimpan data di peramban pengguna dengan [Web Storage API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API).
 
 ## Screenshot
 
@@ -25,10 +26,12 @@ Fitur yang ada di aplikasi ini di antaranya:
 
 ## Next Todo
 
-- [x] Clean Code
-- [x] onInput harus di input element
-- [x] Sort Books
-- [ ] Footer 
+- [x] *Clean Code*.
+- [x] onInput harus di input element.
+- [x] *Sort Books.*
+- [x] Footer.
+- [x] Validasi jika nilai berbeda dari sebelumnya. (Update)
+- [ ] Hilangkan **form** saat pencarian dan munculkan saat tombol **Ubah Buku** dipencet.
 
 ## ⚠ Info ⚠
 

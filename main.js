@@ -1,5 +1,6 @@
 const books = [];
 let bookContent = {};
+let bookTemp = {};
 let isEditing = false;
 
 const title = document.getElementById('inputBookTitle');
@@ -8,6 +9,7 @@ const year = document.getElementById('inputBookYear')
 const isComplete = document.getElementById('inputBookIsComplete');
 const searchBookTitle = document.getElementById('searchBookTitle')
 const bookSubmit = document.getElementById('bookSubmit');
+const formInput = document.getElementById('inputBook');
 
 function loadDataFromStorage() {
   const serializedData = localStorage.getItem('books');
@@ -47,6 +49,7 @@ function deleteBook(id, namabuku) {
 function editBook(id) {
   isEditing = true;
   bookContent = findBookById(id)
+  bookTemp = findBookById(id)
 
   title.value = bookContent.title;
   year.value = bookContent.year;
@@ -68,7 +71,14 @@ function updateBook(){
 
   books.splice(getIndexBook(bookContent.id), 1, bookContent)
   isEditing = false
-  alert('Mantap, Buku ' +'berhasil diubah' );
+  if (
+    bookTemp.title != title.value ||
+    bookTemp.author != author.value ||
+    bookTemp.year != year.value ||
+    bookTemp.isComplete != isComplete.checked
+  ) {
+    alert('Mantap, buku berhasil diubah' );
+  }
   updateView()
 }
 
@@ -88,20 +98,8 @@ function filterBookIscomplete(isComplete){
   return books.filter(book => book.isComplete == isComplete);
 }
 
-function updateView() {
-  document.dispatchEvent(new Event('render-book'))
-  localStorage.setItem('books', JSON.stringify(books)) 
-  return;
-}
-
-
-function resetValue() {
-  title.value = "";
-  author.value = "";
-  year.value = "";
-  isComplete.checked = false;
-  bookContent = {};
-  searchBookTitle.value = "";
+const filterByName = (title) => {
+  return books.filter(book => book.title.toLocaleLowerCase().includes(title.toLocaleLowerCase()))
 }
 
 function findBookByName(title) {
@@ -116,6 +114,23 @@ function findBookByName(title) {
   }
   return;
 }
+function updateView() {
+  document.dispatchEvent(new Event('render-book'))
+  localStorage.setItem('books', JSON.stringify(books)) 
+  return;
+}
+
+
+function resetValue() {
+  title.value = "";
+  author.value = "";
+  year.value = "";
+  isComplete.checked = false;
+  bookContent = {};
+  bookTemp = {};
+  searchBookTitle.value = "";
+}
+
 
 function renderBook(book, selector){
     if (book.length > 0) {
@@ -126,7 +141,7 @@ function renderBook(book, selector){
           <p>${book.author} · ${book.year}</p>
           <div class="action">
             <button onClick="checkedBook('${book.id}')">${book.isComplete ? 'Tandai sedang dibaca': 'Tandai sudah dibaca'}</button>
-            <button onClick="editBook('${book.id}')">Ubah Buku</button>
+            <button onClick="editBook('${book.id}')">Perbaharui Buku</button>
             <button onClick="deleteBook('${book.id}','${book.title}')">Hapus buku</button>
           </div>
         </article>
@@ -139,24 +154,28 @@ function renderBook(book, selector){
 
 
 document.addEventListener('DOMContentLoaded', function() {
-  const searchBook = document.getElementById('searchBook');
   searchBookTitle.addEventListener('input', function() {
     findBookByName(searchBookTitle)
   })
-  
-  const formInput = document.getElementById('inputBook');
+
   formInput.addEventListener('submit', function(e) {
     e.preventDefault()
     isEditing ? updateBook() : addBook()
-
     resetValue()
   })
+
   loadDataFromStorage()
 })
 
 document.addEventListener('render-book', function() { 
   if (!isEditing) bookSubmit.innerText = "Tambahkan Buku";
 
-  renderBook(sortBook(filterBookIscomplete(false)), document.getElementById('incompleteBookshelfList'))
-  renderBook(sortBook(filterBookIscomplete(true)), document.getElementById('completeBookshelfList'))
+  renderBook(
+    sortBook(filterBookIscomplete(false)),
+    document.getElementById('incompleteBookshelfList')
+  )
+  renderBook(
+    sortBook(filterBookIscomplete(true)), 
+    document.getElementById('completeBookshelfList')
+    )
 })

@@ -206,6 +206,13 @@ color: var(--second-text-color);
   width: 100%;
 }
 
+footer {
+  grid-column: 1 / 3;
+  text-align: center;
+  height: 80px;
+  margin-top: 2em;
+}
+
 @media (min-width: 1024px) {
   .head_bar {
     flex-direction: row;
