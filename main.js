@@ -109,20 +109,24 @@ const filterByName = (title) => {
   return books.filter(book => book.title.toLocaleLowerCase().includes(title.toLocaleLowerCase()))
 }
 
-function findBookByName(title) {
+function findBookByName(searchValue) {
   const bookItem = document.getElementsByClassName('book_item');
   for (const book of bookItem) {
     const itemTitle = book.querySelector(".item-title")
-    if(itemTitle.textContent.toLowerCase().includes(title.value.toLowerCase())) {
+    if(itemTitle.textContent.toLowerCase().includes(searchValue.value.toLowerCase())) {
       book.style.display = 'block'
-      inputSection.classList.add('flex')
-      inputSection.classList.remove('hidden')
+      if (searchValue.value.length > 0) {
+        inputSection.classList.remove('flex')
+        inputSection.classList.add('hidden')
+      } else {
+        inputSection.classList.remove('hidden')
+        inputSection.classList.add('flex')
+      }
     } else {
       book.style.display = 'none'
-      inputSection.classList.add('hidden')
-      inputSection.classList.remove('flex')
     }
   }
+
   return;
 }
 function updateView() {
