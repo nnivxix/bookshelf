@@ -27,11 +27,11 @@ Fitur yang ada di aplikasi ini di antaranya:
 ## Next Todo
 
 - [x] *Clean Code*.
-- [x] onInput harus di input element.
+- [x] Gunakan `onInput` pada *meng-input element* supaya reaktif.
 - [x] *Sort Books.*
-- [x] Footer.
+- [x] *Footer*.
 - [x] Validasi jika nilai berbeda dari sebelumnya. (Update)
-- [ ] Hilangkan **form** saat pencarian dan munculkan saat tombol **Ubah Buku** dipencet.
+- [ ] Hilangkan *form* saat pencarian dan munculkan saat tombol **Ubah Buku** dipencet.
 
 ## ⚠ Info ⚠
 
