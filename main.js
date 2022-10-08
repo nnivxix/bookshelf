@@ -10,6 +10,7 @@ const isComplete = document.getElementById('inputBookIsComplete');
 const searchBookTitle = document.getElementById('searchBookTitle')
 const bookSubmit = document.getElementById('bookSubmit');
 const formInput = document.getElementById('inputBook');
+const inputSection = document.getElementById('input_section');
 
 function loadDataFromStorage() {
   const serializedData = localStorage.getItem('books');
@@ -30,7 +31,7 @@ function addBook() {
     year: parseInt(year.value),
     isComplete: isComplete.checked
   })
-  alert('Mantap, Buku telah berhasil ditambah')
+  alert('Mantap, Buku telah berhasil ditambah.')
   updateView()
 }
 
@@ -41,7 +42,7 @@ function checkedBook(id){
 }
 
 function deleteBook(id, namabuku) {
-  const question = confirm('Apakah kamu yakin ingin menghapus buku ' + namabuku + '?')
+  const question = confirm('Yakin nih mau menghapus buku: "' + namabuku + '"?')
   if (question) books.splice(getIndexBook(id),1);
   updateView()
 }
@@ -56,6 +57,12 @@ function editBook(id) {
   author.value = bookContent.author
   isComplete.checked = bookContent.isComplete
 
+  if (inputSection.classList.contains('hidden')) {
+    inputSection.classList.add('flex')
+    inputSection.classList.remove('hidden')
+  }
+  searchBookTitle.value = "";
+  updateView()
   bookSubmit.innerText = "Perbaharui Buku"
   window.location.href = '#inputBookTitle'
 }
@@ -77,7 +84,7 @@ function updateBook(){
     bookTemp.year != year.value ||
     bookTemp.isComplete != isComplete.checked
   ) {
-    alert('Mantap, buku berhasil diubah' );
+    alert('Mantap, buku berhasil diubah.' );
   }
   updateView()
 }
@@ -108,8 +115,12 @@ function findBookByName(title) {
     const itemTitle = book.querySelector(".item-title")
     if(itemTitle.textContent.toLowerCase().includes(title.value.toLowerCase())) {
       book.style.display = 'block'
+      inputSection.classList.add('flex')
+      inputSection.classList.remove('hidden')
     } else {
       book.style.display = 'none'
+      inputSection.classList.add('hidden')
+      inputSection.classList.remove('flex')
     }
   }
   return;
@@ -177,5 +188,5 @@ document.addEventListener('render-book', function() {
   renderBook(
     sortBook(filterBookIscomplete(true)), 
     document.getElementById('completeBookshelfList')
-    )
+  )
 })

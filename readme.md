@@ -8,7 +8,7 @@ Bookshelf merupakan web aplikasi untuk menejemen buku yang dibuat dengan vanila 
 
 ![W3C Validation](https://img.shields.io/w3c-validation/html?targetUrl=https%3A%2F%2Fnnivxix.github.io%2Fbookshelf%2F) ![Website](https://img.shields.io/website?down_color=gray&down_message=offline&up_color=green&up_message=online&url=https%3A%2F%2Fnnivxix.github.io%2Fbookshelf%2F) ![GitHub last commit](https://img.shields.io/github/last-commit/nnivxix/bookshelf?style=flat-square) ![GitHub deployments](https://img.shields.io/github/deployments/nnivxix/bookshelf/github-pages?label=deploy)
 
-## Features
+## *Features*
 
 Fitur yang ada di aplikasi ini di antaranya:
 
@@ -18,20 +18,20 @@ Fitur yang ada di aplikasi ini di antaranya:
 4. Mengubah konten buku. (Update)
 5. Menghapus buku jika sudah tidak dibutuhkan lagi. (Delete)
 6. Mencari buku.
-7. Menyimpan data di peramban pengguna dengan [Web Storage API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API).
+7. Menyimpan data di peramban pengguna dengan [API Web Storage](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API).
 
-## Screenshot
+## *Screenshot*
 
 ![Shot](/img/shot.png)
 
-## Next Todo
+## *Next Todo*
 
 - [x] *Clean Code*.
 - [x] Gunakan `onInput` pada *meng-input element* supaya reaktif.
 - [x] *Sort Books.*
 - [x] *Footer*.
 - [x] Validasi jika nilai berbeda dari sebelumnya. (Update)
-- [ ] Hilangkan *form* saat pencarian dan munculkan saat tombol **Ubah Buku** dipencet.
+- [x] Hilangkan *form* saat pencarian dan munculkan saat tombol **Ubah Buku** dipencet.
 
 ## ⚠ Info ⚠
 
