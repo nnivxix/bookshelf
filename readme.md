@@ -32,6 +32,7 @@ Fitur yang ada di aplikasi ini di antaranya:
 - [x] *Footer*.
 - [x] Validasi jika nilai berbeda dari sebelumnya. (Update)
 - [x] Hilangkan *form* saat pencarian dan munculkan saat tombol **Ubah Buku** dipencet.
+- [ ] Tambahkan **Cache** untuk mode **offline**. [How To Make Your Website Work Offline](https://itnext.io/how-to-make-your-website-work-offline-b5be47b92adc) 
 
 ## ⚠ Info ⚠
 
