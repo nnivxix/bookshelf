@@ -40,4 +40,4 @@ Fitur yang ada di aplikasi ini di antaranya:
 
 Untuk bagian back-end silakan buka `branch` yang lain di *repository* ini.
 
-- [branch back-end](https://github.com/nnivxix/bookshelf/tree/main)
+- [branch back-end](https://github.com/nnivxix/bookshelf/tree/back-end)
