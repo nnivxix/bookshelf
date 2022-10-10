@@ -8,6 +8,8 @@ Bookshelf merupakan web aplikasi untuk menejemen buku yang dibuat dengan vanila 
 
 ![W3C Validation](https://img.shields.io/w3c-validation/html?targetUrl=https%3A%2F%2Fnnivxix.github.io%2Fbookshelf%2F) ![Website](https://img.shields.io/website?down_color=gray&down_message=offline&up_color=green&up_message=online&url=https%3A%2F%2Fnnivxix.github.io%2Fbookshelf%2F) ![GitHub last commit](https://img.shields.io/github/last-commit/nnivxix/bookshelf?style=flat-square) ![GitHub deployments](https://img.shields.io/github/deployments/nnivxix/bookshelf/github-pages?label=deploy)
 
+![Rating from Dicoding](img/rating.png)
+
 ## *Features*
 
 Fitur yang ada di aplikasi ini di antaranya:
