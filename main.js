@@ -13,6 +13,7 @@ const clearSearch = document.getElementById("clearSearch");
 const bookSubmit = document.getElementById("bookSubmit");
 const formInput = document.getElementById("inputBook");
 const inputSection = document.getElementById("input_section");
+const bookItems = document.getElementsByClassName("book_item");
 
 /**
  *
@@ -32,6 +33,9 @@ clearSearch.addEventListener("click", function () {
   clearSearch.style.display = "none";
   inputSection.classList.remove("hidden");
   inputSection.classList.add("flex");
+  for (const bookItem of bookItems) {
+    bookItem.style.display = "block";
+  }
 });
 
 /**
@@ -153,8 +157,7 @@ const filterByName = (title) => {
 };
 
 function findBookByName(searchValue) {
-  const bookItem = document.getElementsByClassName("book_item");
-  for (const book of bookItem) {
+  for (const book of bookItems) {
     const itemTitle = book.querySelector(".item-title");
     if (
       itemTitle.textContent
@@ -215,7 +218,7 @@ function renderBook(book, selector) {
           book.isComplete ? "Tandai sedang dibaca" : "Tandai sudah dibaca"
         }</button>
             <button onClick="editBook('${book.id}')">Perbaharui Buku</button>
-            <button onClick="deleteBook('${book.id}','${
+            <button class="deleteBook" onClick="deleteBook('${book.id}','${
           book.title
         }')">Hapus buku</button>
           </div>

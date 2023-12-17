@@ -3,6 +3,7 @@
   --main-text-color: #636363;
   --second-text-color: #1B263B;
   --box-color: #D9D9D9;
+  --danger: #e83023;
   --text-box-color: #868686;
   --has-read: #84DD63;
   --in-read: #A2D8E4;
@@ -194,6 +195,11 @@ color: var(--second-text-color);
 .incompleted {
   background-color: var(--in-read);
 }
+.deleteBook {
+  color: var(--danger);
+  border: 1px solid var(--danger) !important;
+}
+
 
 #searchBookTitle {
   background-color: var(--box-color);
@@ -214,6 +220,7 @@ color: var(--second-text-color);
   margin-right: 14px;
   margin-top: 8px;
   cursor: pointer;
+  display: none;
 }
 
 footer {
