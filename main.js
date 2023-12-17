@@ -107,7 +107,7 @@ function editBook(id) {
   updateView();
   searchBookTitle.value = "";
   bookSubmit.innerText = "Perbaharui Buku";
-  window.location.href = "#inputBookTitle";
+  title.focus();
 }
 
 function updateBook() {
