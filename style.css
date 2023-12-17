@@ -203,6 +203,19 @@ color: var(--second-text-color);
   width: 100%;
 }
 
+#searchBook {
+  position: relative;
+}
+
+#clearSearch {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-right: 14px;
+  margin-top: 8px;
+  cursor: pointer;
+}
+
 footer {
   grid-column: 1 / 3;
   text-align: center;

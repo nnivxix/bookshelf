@@ -8,12 +8,36 @@ const author = document.getElementById("inputBookAuthor");
 const year = document.getElementById("inputBookYear");
 const isComplete = document.getElementById("inputBookIsComplete");
 const searchBookTitle = document.getElementById("searchBookTitle");
+const searchBook = document.getElementById("searchBook");
+const clearSearch = document.getElementById("clearSearch");
 const bookSubmit = document.getElementById("bookSubmit");
 const formInput = document.getElementById("inputBook");
 const inputSection = document.getElementById("input_section");
 
+/**
+ *
+ * Add clear search input
+ *
+ */
+searchBookTitle.addEventListener("input", function () {
+  if (searchBookTitle.value.length) {
+    clearSearch.style.display = "block";
+  } else {
+    clearSearch.style.display = "none";
+  }
+});
+clearSearch.addEventListener("click", function () {
+  searchBookTitle.value = "";
+  clearSearch.style.display = "none";
+});
+
+/**
+ *
+ * Add keyboard event when user click `ctrl + K`
+ *
+ */
 window.addEventListener("keydown", function (event) {
-  if (event.ctrlKey && event.key === "k") {
+  if ((event.ctrlKey && event.key === "k") || event.key === "K") {
     event.preventDefault();
 
     searchBookTitle.focus();

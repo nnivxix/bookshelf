@@ -1,89 +1,138 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico" />
+    <link rel="stylesheet" href="style.css" />
+    <meta name="theme-color" content="#E9E9E9" />
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="icon" type="image/x-icon" href="img/favicon.ico">
-  <link rel="stylesheet" href="style.css">
-  <meta name="theme-color" content="#E9E9E9">
+    <!-- Primary Meta Tags -->
+    <title>Rakbuku</title>
+    <meta name="title" content="Rakbuku" />
+    <meta name="description" content="Atur buku yang kamu baca sekarang" />
 
-  <!-- Primary Meta Tags -->
-  <title>Rakbuku</title>
-  <meta name="title" content="Rakbuku">
-  <meta name="description" content="Atur buku yang kamu baca sekarang">
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://nnivxix.github.io/bookshelf/" />
+    <meta property="og:title" content="Rakbuku" />
+    <meta
+      property="og:description"
+      content="Atur buku yang kamu baca sekarang"
+    />
+    <meta
+      property="og:image"
+      content="https://i.ibb.co/1rfDL5J/Dribbble-Mockup-Shot-01-1.png"
+    />
 
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://nnivxix.github.io/bookshelf/">
-  <meta property="og:title" content="Rakbuku">
-  <meta property="og:description" content="Atur buku yang kamu baca sekarang">
-  <meta property="og:image" content="https://i.ibb.co/1rfDL5J/Dribbble-Mockup-Shot-01-1.png">
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta
+      property="twitter:url"
+      content="https://nnivxix.github.io/bookshelf/"
+    />
+    <meta property="twitter:title" content="Rakbuku" />
+    <meta
+      property="twitter:description"
+      content="Atur buku yang kamu baca sekarang"
+    />
+    <meta
+      property="twitter:image"
+      content="https://i.ibb.co/1rfDL5J/Dribbble-Mockup-Shot-01-1.png"
+    />
+  </head>
 
-  <!-- Twitter -->
-  <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:url" content="https://nnivxix.github.io/bookshelf/">
-  <meta property="twitter:title" content="Rakbuku">
-  <meta property="twitter:description" content="Atur buku yang kamu baca sekarang">
-  <meta property="twitter:image" content="https://i.ibb.co/1rfDL5J/Dribbble-Mockup-Shot-01-1.png">
-</head>
-
-<body>
-  <header class="head_bar">
-    <h1 class="head_bar__title">Rakbuku</h1>
-    <form id="searchBook" onsubmit="event.preventDefault();">
-      <input id="searchBookTitle" type="text" placeholder="Cari Buku: Manusia Hebat">
-    </form>
-  </header>
-
-  <main class="container">
-    <div class="input_section flex" id="input_section" >
-      <form id="inputBook">
-        <div class="input">
-          <label for="inputBookTitle">Judul Buku<span class="important">*</span></label>
-          <input id="inputBookTitle" autofocus type="text" required placeholder="Menjadi Koki Handal">
-        </div>
-        <div class="input">
-          <label for="inputBookAuthor">Penulis Buku <span class="important">*</span></label>
-          <input id="inputBookAuthor" type="text" required placeholder="Junaedi">
-        </div>
-        <div class="input">
-          <label for="inputBookYear">Tahun Terbit <span class="important">*</span></label>
-          <input id="inputBookYear" type="number" required placeholder="2019">
-        </div>
-        <div class="input_inline">
-          <input id="inputBookIsComplete" type="checkbox" style="padding-right: 10px;">
-          <label for="inputBookIsComplete">Selesai dibaca</label>
-        </div>
-        <button id="bookSubmit" type="submit"></button>
+  <body>
+    <header class="head_bar">
+      <h1 class="head_bar__title">Rakbuku</h1>
+      <form id="searchBook" onsubmit="event.preventDefault();">
+        <span id="clearSearch">&#x2716;</span>
+        <input
+          id="searchBookTitle"
+          type="text"
+          placeholder="Cari Buku: Manusia Hebat"
+        />
       </form>
-    </div>
-    <div class="book_shelf">
-      <h2>Sedang dibaca 📖</h2>
-      <div id="incompleteBookshelfList" class="book_list">
-        <!-- konten buku berada di sini -->
+    </header>
+
+    <main class="container">
+      <div class="input_section flex" id="input_section">
+        <form id="inputBook">
+          <div class="input">
+            <label for="inputBookTitle"
+              >Judul Buku<span class="important">*</span></label
+            >
+            <input
+              id="inputBookTitle"
+              autofocus
+              type="text"
+              required
+              placeholder="Menjadi Koki Handal"
+            />
+          </div>
+          <div class="input">
+            <label for="inputBookAuthor"
+              >Penulis Buku <span class="important">*</span></label
+            >
+            <input
+              id="inputBookAuthor"
+              type="text"
+              required
+              placeholder="Junaedi"
+            />
+          </div>
+          <div class="input">
+            <label for="inputBookYear"
+              >Tahun Terbit <span class="important">*</span></label
+            >
+            <input
+              id="inputBookYear"
+              type="number"
+              required
+              placeholder="2019"
+            />
+          </div>
+          <div class="input_inline">
+            <input
+              id="inputBookIsComplete"
+              type="checkbox"
+              style="padding-right: 10px"
+            />
+            <label for="inputBookIsComplete">Selesai dibaca</label>
+          </div>
+          <button id="bookSubmit" type="submit"></button>
+        </form>
       </div>
-    </div>
-    
-    <div class="book_shelf">
-      <h2>Sudah dibaca 📚</h2>
-      <div id="completeBookshelfList" class="book_list">
-        <!-- konten buku berada di sini -->
+      <div class="book_shelf">
+        <h2>Sedang dibaca 📖</h2>
+        <div id="incompleteBookshelfList" class="book_list">
+          <!-- konten buku berada di sini -->
+        </div>
       </div>
-    </div>
 
-    <footer>
-      <p>Dibangun bersama dengan 💛 oleh <a target="_blank"  href="https://github.com/nnivxix">Hanasa</a> di 🇮🇩.</p>
-    </footer>
-  </main>
+      <div class="book_shelf">
+        <h2>Sudah dibaca 📚</h2>
+        <div id="completeBookshelfList" class="book_list">
+          <!-- konten buku berada di sini -->
+        </div>
+      </div>
 
-  <script src="main.js"></script>
+      <footer>
+        <p>
+          Dibangun bersama dengan 💛 oleh
+          <a target="_blank" href="https://github.com/nnivxix">Hanasa</a> di 🇮🇩.
+        </p>
+      </footer>
+    </main>
 
-</body>
-
+    <script src="main.js"></script>
+  </body>
 </html>
