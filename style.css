@@ -242,6 +242,14 @@ footer {
   #searchBook {
     width: 50%;
   }
+  #clearSearch {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-right: 14px;
+    margin-top: 12px;
+    cursor: pointer;
+  }
   .container {
     grid-gap: 24px;
   }

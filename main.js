@@ -26,9 +26,12 @@ searchBookTitle.addEventListener("input", function () {
     clearSearch.style.display = "none";
   }
 });
+
 clearSearch.addEventListener("click", function () {
   searchBookTitle.value = "";
   clearSearch.style.display = "none";
+  inputSection.classList.remove("hidden");
+  inputSection.classList.add("flex");
 });
 
 /**
