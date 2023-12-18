@@ -40,14 +40,28 @@ clearSearch.addEventListener("click", function () {
 
 /**
  *
- * Add keyboard event when user click `ctrl + K`
+ * Add keyboard event
  *
  */
 window.addEventListener("keydown", function (event) {
+  // when user click `ctrl + K`
   if ((event.ctrlKey && event.key === "k") || event.key === "K") {
     event.preventDefault();
 
     searchBookTitle.focus();
+    return;
+  }
+
+  // when user click `ctrl + alt+ N`
+  if (
+    (event.ctrlKey && event.altKey && event.key === "n") ||
+    event.key === "N"
+  ) {
+    event.preventDefault();
+    if (!isEditing) {
+      title.focus();
+    }
+    return;
   }
 });
 
