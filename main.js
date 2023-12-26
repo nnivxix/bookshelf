@@ -118,7 +118,6 @@ function editBook(id) {
 
   showHideForm();
   updateView();
-  searchBookTitle.value = "";
   bookSubmit.innerText = "Perbaharui Buku";
   title.focus();
 }
@@ -132,8 +131,9 @@ function updateBook() {
     isComplete: isComplete.checked,
   };
 
-  books.splice(getIndexBook(bookContent.id), 1, bookContent);
   isEditing = false;
+  books.splice(getIndexBook(bookContent.id), 1, bookContent);
+
   if (
     bookTemp.title != title.value ||
     bookTemp.author != author.value ||
@@ -153,16 +153,16 @@ function findBookById(id) {
   return books.find((book) => book.id == id);
 }
 
-function sortBook(book) {
-  return book.sort((a, b) =>
-    a.title > b.title ? 1 : b.title > a.title ? -1 : 0
-  );
-}
-
 function filterBookIscomplete(isComplete) {
-  return filterByName(searchBookTitle.value).filter(
-    (book) => book.isComplete == isComplete
-  );
+  return filterByName(searchBookTitle.value)
+    .filter((book) => book.isComplete == isComplete)
+    .sort((a, b) =>
+      a.title.toLowerCase() > b.title.toLowerCase()
+        ? 1
+        : b.title.toLowerCase() > a.title.toLowerCase()
+        ? -1
+        : 0
+    );
 }
 
 const filterByName = (title) => {
@@ -170,30 +170,6 @@ const filterByName = (title) => {
     book.title.toLocaleLowerCase().includes(title.toLocaleLowerCase())
   );
 };
-
-function findBookByName(searchValue) {
-  for (const book of bookItems) {
-    const itemTitle = book.querySelector(".item-title");
-    if (
-      itemTitle.textContent
-        .toLowerCase()
-        .includes(searchValue.value.toLowerCase())
-    ) {
-      book.style.display = "block";
-      if (searchValue.value.length > 0) {
-        inputSection.classList.remove("flex");
-        inputSection.classList.add("hidden");
-      } else {
-        inputSection.classList.remove("hidden");
-        inputSection.classList.add("flex");
-      }
-    } else {
-      book.style.display = "none";
-    }
-  }
-
-  return;
-}
 
 function showHideForm() {
   if (inputSection.classList.contains("hidden")) {
