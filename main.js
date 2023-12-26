@@ -33,9 +33,8 @@ clearSearch.addEventListener("click", function () {
   clearSearch.style.display = "none";
   inputSection.classList.remove("hidden");
   inputSection.classList.add("flex");
-  for (const bookItem of bookItems) {
-    bookItem.style.display = "block";
-  }
+  filterByName("");
+  document.dispatchEvent(new Event("render-book"));
 });
 
 /**
@@ -68,7 +67,7 @@ window.addEventListener("keydown", function (event) {
 function loadDataFromStorage() {
   const serializedData = localStorage.getItem("books");
   let data = JSON.parse(serializedData);
-  if (data !== null) {
+  if (data) {
     for (const book of data) {
       books.push(book);
     }
@@ -119,7 +118,6 @@ function editBook(id) {
 
   showHideForm();
   updateView();
-  searchBookTitle.value = "";
   bookSubmit.innerText = "Perbaharui Buku";
   title.focus();
 }
@@ -133,8 +131,9 @@ function updateBook() {
     isComplete: isComplete.checked,
   };
 
-  books.splice(getIndexBook(bookContent.id), 1, bookContent);
   isEditing = false;
+  books.splice(getIndexBook(bookContent.id), 1, bookContent);
+
   if (
     bookTemp.title != title.value ||
     bookTemp.author != author.value ||
@@ -154,14 +153,16 @@ function findBookById(id) {
   return books.find((book) => book.id == id);
 }
 
-function sortBook(book) {
-  return book.sort((a, b) =>
-    a.title > b.title ? 1 : b.title > a.title ? -1 : 0
-  );
-}
-
 function filterBookIscomplete(isComplete) {
-  return books.filter((book) => book.isComplete == isComplete);
+  return filterByName(searchBookTitle.value)
+    .filter((book) => book.isComplete == isComplete)
+    .sort((a, b) =>
+      a.title.toLowerCase() > b.title.toLowerCase()
+        ? 1
+        : b.title.toLowerCase() > a.title.toLowerCase()
+        ? -1
+        : 0
+    );
 }
 
 const filterByName = (title) => {
@@ -169,30 +170,6 @@ const filterByName = (title) => {
     book.title.toLocaleLowerCase().includes(title.toLocaleLowerCase())
   );
 };
-
-function findBookByName(searchValue) {
-  for (const book of bookItems) {
-    const itemTitle = book.querySelector(".item-title");
-    if (
-      itemTitle.textContent
-        .toLowerCase()
-        .includes(searchValue.value.toLowerCase())
-    ) {
-      book.style.display = "block";
-      if (searchValue.value.length > 0) {
-        inputSection.classList.remove("flex");
-        inputSection.classList.add("hidden");
-      } else {
-        inputSection.classList.remove("hidden");
-        inputSection.classList.add("flex");
-      }
-    } else {
-      book.style.display = "none";
-    }
-  }
-
-  return;
-}
 
 function showHideForm() {
   if (inputSection.classList.contains("hidden")) {
@@ -204,6 +181,7 @@ function showHideForm() {
 function updateView() {
   document.dispatchEvent(new Event("render-book"));
   localStorage.setItem("books", JSON.stringify(books));
+  searchBookTitle.value = searchBookTitle.value;
   return;
 }
 
@@ -214,7 +192,7 @@ function resetValue() {
   isComplete.checked = false;
   bookContent = {};
   bookTemp = {};
-  searchBookTitle.value = "";
+  // searchBookTitle.value = "";
 }
 
 function renderBook(book, selector) {
@@ -247,7 +225,8 @@ function renderBook(book, selector) {
 
 document.addEventListener("DOMContentLoaded", function () {
   searchBookTitle.addEventListener("input", function () {
-    findBookByName(searchBookTitle);
+    filterByName(searchBookTitle.value);
+    document.dispatchEvent(new Event("render-book"));
   });
 
   formInput.addEventListener("submit", function (e) {
@@ -263,11 +242,11 @@ document.addEventListener("render-book", function () {
   if (!isEditing) bookSubmit.innerText = "Tambahkan Buku";
 
   renderBook(
-    sortBook(filterBookIscomplete(false)),
+    filterBookIscomplete(false),
     document.getElementById("incompleteBookshelfList")
   );
   renderBook(
-    sortBook(filterBookIscomplete(true)),
+    filterBookIscomplete(true),
     document.getElementById("completeBookshelfList")
   );
 });
