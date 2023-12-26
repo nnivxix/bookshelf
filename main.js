@@ -14,7 +14,7 @@ const bookSubmit = document.getElementById("bookSubmit");
 const formInput = document.getElementById("inputBook");
 const inputSection = document.getElementById("input_section");
 const bookItems = document.getElementsByClassName("book_item");
-
+const inputBookYear = document.getElementById("inputBookYear");
 /**
  *
  * Add clear search input
@@ -61,6 +61,12 @@ window.addEventListener("keydown", function (event) {
       title.focus();
     }
     return;
+  }
+});
+
+inputBookYear.addEventListener("keydown", function (event) {
+  if (isNaN(event.key) && event.key !== "Backspace") {
+    event.preventDefault();
   }
 });
 
