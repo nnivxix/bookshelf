@@ -33,9 +33,8 @@ clearSearch.addEventListener("click", function () {
   clearSearch.style.display = "none";
   inputSection.classList.remove("hidden");
   inputSection.classList.add("flex");
-  for (const bookItem of bookItems) {
-    bookItem.style.display = "block";
-  }
+  filterByName("");
+  document.dispatchEvent(new Event("render-book"));
 });
 
 /**
@@ -68,7 +67,7 @@ window.addEventListener("keydown", function (event) {
 function loadDataFromStorage() {
   const serializedData = localStorage.getItem("books");
   let data = JSON.parse(serializedData);
-  if (data !== null) {
+  if (data) {
     for (const book of data) {
       books.push(book);
     }
@@ -155,19 +154,14 @@ function findBookById(id) {
 }
 
 function sortBook(book) {
-  // console.log(filterByName(searchBookTitle.value));
   return book.sort((a, b) =>
     a.title > b.title ? 1 : b.title > a.title ? -1 : 0
   );
 }
 
 function filterBookIscomplete(isComplete) {
-  // updateView();
-
-  return (
-    filterByName(searchBookTitle.value).filter(
-      (book) => book.isComplete == isComplete
-    ) ?? books
+  return filterByName(searchBookTitle.value).filter(
+    (book) => book.isComplete == isComplete
   );
 }
 
@@ -211,6 +205,7 @@ function showHideForm() {
 function updateView() {
   document.dispatchEvent(new Event("render-book"));
   localStorage.setItem("books", JSON.stringify(books));
+  searchBookTitle.value = searchBookTitle.value;
   return;
 }
 
@@ -221,7 +216,7 @@ function resetValue() {
   isComplete.checked = false;
   bookContent = {};
   bookTemp = {};
-  searchBookTitle.value = "";
+  // searchBookTitle.value = "";
 }
 
 function renderBook(book, selector) {
@@ -254,13 +249,7 @@ function renderBook(book, selector) {
 
 document.addEventListener("DOMContentLoaded", function () {
   searchBookTitle.addEventListener("input", function () {
-    // findBookByName(searchBookTitle);
     filterByName(searchBookTitle.value);
-    console.log({
-      searchBookTitle: searchBookTitle.value,
-      filterByName: filterByName(searchBookTitle.value),
-      books,
-    });
     document.dispatchEvent(new Event("render-book"));
   });
 
@@ -285,18 +274,3 @@ document.addEventListener("render-book", function () {
     document.getElementById("completeBookshelfList")
   );
 });
-
-/**
- * books
- *
- * render books
- *
- * filter books
- *
- * render books
- *
- * remove filter
- *
- * render books
- *
- */
